@@ -74,7 +74,7 @@ Error:
 [ERROR][o.o.s.c.ConfigurationLoaderSecurity7] [node-1] Failure no such index [.opendistro_security] retrieving configuration for [INTERNALUSERS, ACTIONGROUPS, CONFIG, ROLES, ROLESMAPPING, TENANTS, NODESDN, WHITELIST, ALLOWLIST, AUDIT] (index=.opendistro_security)
 ```
 
-## Results
+## Experiments
 - `plugins.security.allow_default_init_securityindex`
 - `action.auto_create_index`
 
@@ -82,22 +82,19 @@ Error:
   - Success
 - `allow_default_init_securityindex=false`
   - `Failure no such index`
-- `auto_create_index=false
+- `auto_create_index=false`
   - Success
 - Both `false`
   - `Failure no such index`
-
-## With auto index creation
+- So the key variable is `allow_default_init_securityindex`, not `auto_create_index`.
 
 ```sh
 docker run \
   -p 9201:9200 -p 9600:9600 \
   -e "discovery.type=single-node" \
   -e "DISABLE_INSTALL_DEMO_CONFIG=true" \
-  -e "action.auto_create_index=true" \
-  -e "plugins.security.system_indices.enabled=true" \
+  -e "action.auto_create_index=<value>" \
+  -e "plugins.security.allow_default_init_securityindex=<value>" \
   -v $(pwd):/usr/share/opensearch/config \
   opensearchproject/opensearch:latest
 ```
-
-  -e "plugins.security.allow_default_init_securityindex=true" \
