@@ -75,18 +75,15 @@ Error:
 ```
 
 ## Experiments
-- `plugins.security.allow_default_init_securityindex`
-- `action.auto_create_index`
 
-- Both `true`
-  - Success
-- `allow_default_init_securityindex=false`
-  - `Failure no such index`
-- `auto_create_index=false`
-  - Success
-- Both `false`
-  - `Failure no such index`
-- So the key variable is `allow_default_init_securityindex`, not `auto_create_index`.
+Combination of `action.auto_create_index` and `plugins.security.allow_default_init_securityindex`:
+
+| | `init_securityindex: true` | `init_securityindex: false` |
+| --- | --- | --- |
+| **`auto_create_index: true`**  | ✅ | ❌ `Failure no such index` |
+| **`auto_create_index: false`** | ✅ | ❌ `Failure no such index` |
+
+So the key variable is `allow_default_init_securityindex`, not `auto_create_index`.
 
 ```sh
 docker run \
