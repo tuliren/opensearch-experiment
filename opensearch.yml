@@ -1,0 +1,16 @@
+cluster.name: "my-local-cluster"
+node.name: "node-1"
+discovery.type: "single-node"
+plugins.security.system_indices.permission.enabled: true
+
+# For HTTP:
+plugins.security.ssl.http.enabled: true
+plugins.security.ssl.http.pemcert_filepath: "certs/esnode.pem"
+plugins.security.ssl.http.pemkey_filepath: "certs/esnode-key.pem"
+plugins.security.ssl.http.pemtrustedcas_filepath: "certs/root-ca.pem"
+
+# For Transport:
+plugins.security.ssl.transport.pemcert_filepath: "certs/esnode.pem"
+plugins.security.ssl.transport.pemkey_filepath: "certs/esnode-key.pem"
+plugins.security.ssl.transport.pemtrustedcas_filepath: "certs/root-ca.pem"
+plugins.security.ssl.transport.enforce_hostname_verification: false
